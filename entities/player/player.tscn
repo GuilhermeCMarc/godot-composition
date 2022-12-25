@@ -1,0 +1,70 @@
+[gd_scene load_steps=9 format=3 uid="uid://f6mhaoeg1pvn"]
+
+[ext_resource type="Texture2D" uid="uid://bi046c7lbe631" path="res://entities/player/player.png" id="1_abp6s"]
+[ext_resource type="Script" path="res://entities/player/player.gd" id="1_yluma"]
+[ext_resource type="PackedScene" uid="uid://dcnbltxqygw68" path="res://components/movement/movement_component.tscn" id="3_64xir"]
+[ext_resource type="PackedScene" uid="uid://crjgs7v12ir0m" path="res://components/input/input_component.tscn" id="4_aouk1"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_f4575"]
+radius = 3.0
+height = 12.0
+
+[sub_resource type="Animation" id="Animation_g30da"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_sc4tj"]
+resource_name = "idle_r"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7oukw"]
+_data = {
+"RESET": SubResource("Animation_g30da"),
+"idle_r": SubResource("Animation_sc4tj")
+}
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_yluma")
+movement_component = NodePath("Components/Movement Component")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_f4575")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_7oukw")
+}
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_abp6s")
+hframes = 4
+vframes = 9
+
+[node name="Components" type="Node" parent="."]
+
+[node name="Movement Component" parent="Components" instance=ExtResource("3_64xir")]
+character_body = NodePath("../..")
+
+[node name="Input Component" parent="Components" instance=ExtResource("4_aouk1")]
