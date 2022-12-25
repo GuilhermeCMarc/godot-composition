@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://bjdc2dncaqnbj"]
+[gd_scene load_steps=4 format=3 uid="uid://bjdc2dncaqnbj"]
 
 [ext_resource type="Texture2D" uid="uid://8ssmparb0fu" path="res://icon.svg" id="1_6lj83"]
 [ext_resource type="PackedScene" uid="uid://f6mhaoeg1pvn" path="res://entities/player/player.tscn" id="2_xeioc"]
+[ext_resource type="PackedScene" uid="uid://lmkkt2t8sy7g" path="res://entities/orc/orc.tscn" id="3_icgue"]
 
 [node name="Main" type="Node2D"]
 position = Vector2(135, 90)
@@ -23,3 +24,6 @@ texture = ExtResource("1_6lj83")
 
 [node name="Player" parent="." instance=ExtResource("2_xeioc")]
 position = Vector2(1, -4)
+
+[node name="Orc" parent="." instance=ExtResource("3_icgue")]
+position = Vector2(16, 40)

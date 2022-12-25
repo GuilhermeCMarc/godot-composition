@@ -47,6 +47,7 @@ _data = {
 }
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("movement_component", "input_component")]
+position = Vector2(0, -7)
 script = ExtResource("1_yluma")
 movement_component = NodePath("Components/Movement Component")
 input_component = NodePath("Components/Input Component")
@@ -60,6 +61,7 @@ libraries = {
 }
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -1)
 texture = ExtResource("1_abp6s")
 hframes = 4
 vframes = 9
