@@ -1,0 +1,30 @@
+{
+  "folders": [
+    {
+      "path": "."
+    }
+  ],
+  "settings": {
+    "files.exclude": {
+      "**/.git": true,
+      "**/.svn": true,
+      "**/.hg": true,
+      "**/CVS": true,
+      "**/.DS_Store": true,
+      "**/Thumbs.db": true,
+      "**/*.tscn": true,
+      "**/*.import": true,
+      "**/*.png": true,
+      ".godot": true
+    },
+  },
+  "extensions": {
+    "recommendations": [
+      "aaron-bond.better-comments",
+      "geequlim.godot-tools",
+      "streetsidesoftware.code-spell-checker",
+      "usernamehw.errorlens",
+      "eamodio.gitlens"
+    ]
+  }
+}
