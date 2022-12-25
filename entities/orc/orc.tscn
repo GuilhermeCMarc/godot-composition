@@ -1,6 +1,7 @@
-[gd_scene load_steps=15 format=3 uid="uid://lmkkt2t8sy7g"]
+[gd_scene load_steps=17 format=3 uid="uid://lmkkt2t8sy7g"]
 
 [ext_resource type="Texture2D" uid="uid://u5n8t44bittt" path="res://entities/orc/sprites/head.png" id="1_4wlmn"]
+[ext_resource type="Script" path="res://entities/orc/orc.gd" id="1_wy6q1"]
 [ext_resource type="Texture2D" uid="uid://dmwqtr3pmil7a" path="res://entities/orc/sprites/left_hand.png" id="2_3gw3i"]
 [ext_resource type="Texture2D" uid="uid://b5m0vfmddtai7" path="res://entities/orc/sprites/left_leg.png" id="3_patcb"]
 [ext_resource type="Texture2D" uid="uid://cfxed7gyd6nih" path="res://entities/orc/sprites/right_hand.png" id="4_5wyqt"]
@@ -8,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://boinklije1vk8" path="res://entities/orc/sprites/torso.png" id="6_6ml2o"]
 [ext_resource type="PackedScene" uid="uid://x5dq1x8gosjp" path="res://components/velocity/velocity_component.tscn" id="7_jtv3v"]
 [ext_resource type="PackedScene" uid="uid://dcnbltxqygw68" path="res://components/movement/movement_component.tscn" id="8_16883"]
+[ext_resource type="PackedScene" uid="uid://bbseufd5hnn26" path="res://components/ai_pathfinding/ai_pathfinding_component.tscn" id="8_bpkr2"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_h3mif"]
 radius = 8.0
@@ -582,6 +584,7 @@ _data = {
 
 [node name="Orc" type="CharacterBody2D"]
 motion_mode = 1
+script = ExtResource("1_wy6q1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_h3mif")
@@ -614,6 +617,10 @@ texture = ExtResource("2_3gw3i")
 
 [node name="Head" type="Sprite2D" parent="Visuals"]
 texture = ExtResource("1_4wlmn")
+
+[node name="AIPathfindingComponent" parent="." node_paths=PackedStringArray("velocity_component", "character_body") instance=ExtResource("8_bpkr2")]
+velocity_component = NodePath("../Components/Velocity Component")
+character_body = NodePath("..")
 
 [node name="Components" type="Node" parent="."]
 
