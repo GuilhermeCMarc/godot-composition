@@ -1,42 +1,77 @@
-[gd_scene load_steps=2 format=3 uid="uid://djqyrn7rpn1my"]
+[gd_scene load_steps=3 format=3 uid="uid://djqyrn7rpn1my"]
 
 [ext_resource type="Script" path="res://ui/health_bar/health_bar.gd" id="1_vqoav"]
+[ext_resource type="Texture2D" uid="uid://ca7tmri20lng6" path="res://ui/health_bar/black_pixel.png" id="2_iuh8s"]
 
 [node name="HealthBar" type="Control"]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 1.0
-offset_top = 1.0
-offset_right = 1.0
-offset_bottom = 2.0
-size_flags_horizontal = 0
-size_flags_vertical = 3
+size_flags_horizontal = 4
 script = ExtResource("1_vqoav")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -2.5
+offset_left = -1.5
 offset_top = -1.5
-offset_right = 2.5
+offset_right = 1.5
 offset_bottom = 1.5
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 1
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer"]
+offset_right = 1.0
+offset_bottom = 3.0
+texture = ExtResource("2_iuh8s")
+stretch_mode = 3
+
+[node name="Container" type="MarginContainer" parent="HBoxContainer"]
+offset_left = 2.0
+offset_right = 5.0
+offset_bottom = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="NinePatchRect" type="NinePatchRect" parent="HBoxContainer/Container"]
+offset_right = 3.0
+offset_bottom = 3.0
+texture = ExtResource("2_iuh8s")
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/Container"]
+offset_right = 3.0
+offset_bottom = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
 theme_override_constants/margin_left = 1
 theme_override_constants/margin_top = 1
 theme_override_constants/margin_right = 1
 theme_override_constants/margin_bottom = 1
 
-[node name="PointsHolder" type="GridContainer" parent="MarginContainer"]
+[node name="PointsHolder" type="GridContainer" parent="HBoxContainer/Container/MarginContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(1, 1)
 offset_left = 1.0
 offset_top = 1.0
-offset_right = 1.0
-offset_bottom = 1.0
-size_flags_horizontal = 0
-size_flags_vertical = 0
+offset_right = 2.0
+offset_bottom = 2.0
 theme_override_constants/h_separation = 1
 theme_override_constants/v_separation = 1
 columns = 8
+
+[node name="TextureRect2" type="TextureRect" parent="HBoxContainer"]
+offset_left = 6.0
+offset_right = 7.0
+offset_bottom = 3.0
+size_flags_horizontal = 6
+texture = ExtResource("2_iuh8s")
+stretch_mode = 3

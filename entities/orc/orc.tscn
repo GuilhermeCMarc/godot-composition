@@ -634,6 +634,6 @@ velocity_component = NodePath("../VelocityComponent")
 [node name="HealthComponent" parent="." instance=ExtResource("10_yd084")]
 
 [node name="HealthBar" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("11_aqcwb")]
-offset_top = -13.0
-offset_bottom = -13.0
+offset_top = -10.0
+offset_bottom = -10.0
 health_component = NodePath("../HealthComponent")
