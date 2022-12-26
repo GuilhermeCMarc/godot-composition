@@ -1,8 +1,9 @@
-[gd_scene load_steps=18 format=3 uid="uid://lmkkt2t8sy7g"]
+[gd_scene load_steps=19 format=3 uid="uid://lmkkt2t8sy7g"]
 
 [ext_resource type="Texture2D" uid="uid://u5n8t44bittt" path="res://entities/orc/sprites/head.png" id="1_4wlmn"]
 [ext_resource type="Script" path="res://entities/orc/orc.gd" id="1_wy6q1"]
 [ext_resource type="Texture2D" uid="uid://dmwqtr3pmil7a" path="res://entities/orc/sprites/left_hand.png" id="2_3gw3i"]
+[ext_resource type="PackedScene" uid="uid://ga50qpdh4ij7" path="res://assets/shadows/shadow_sm.tscn" id="2_m8f24"]
 [ext_resource type="Texture2D" uid="uid://b5m0vfmddtai7" path="res://entities/orc/sprites/left_leg.png" id="3_patcb"]
 [ext_resource type="Texture2D" uid="uid://cfxed7gyd6nih" path="res://entities/orc/sprites/right_hand.png" id="4_5wyqt"]
 [ext_resource type="Texture2D" uid="uid://dbt7jdrk2mtek" path="res://entities/orc/sprites/right_leg.png" id="5_4sm8o"]
@@ -593,6 +594,7 @@ pathfinding_component = NodePath("PathfindingComponent")
 health_component = NodePath("HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -6)
 shape = SubResource("CapsuleShape2D_h3mif")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -601,6 +603,10 @@ libraries = {
 }
 
 [node name="Visuals" type="Node2D" parent="."]
+position = Vector2(0, -6)
+
+[node name="ShadowSmall" parent="Visuals" instance=ExtResource("2_m8f24")]
+position = Vector2(0, 7)
 
 [node name="Legs" type="Node2D" parent="Visuals"]
 
@@ -634,6 +640,6 @@ velocity_component = NodePath("../VelocityComponent")
 [node name="HealthComponent" parent="." instance=ExtResource("10_yd084")]
 
 [node name="HealthBar" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("11_aqcwb")]
-offset_top = -10.0
-offset_bottom = -10.0
+offset_top = -16.0
+offset_bottom = -16.0
 health_component = NodePath("../HealthComponent")

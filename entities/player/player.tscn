@@ -53,6 +53,7 @@ script = ExtResource("1_yluma")
 velocity_component = NodePath("VelocityComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, 2)
 shape = SubResource("CapsuleShape2D_f4575")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -61,7 +62,7 @@ libraries = {
 }
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, -1)
+position = Vector2(0, 1)
 texture = ExtResource("1_abp6s")
 hframes = 4
 vframes = 9

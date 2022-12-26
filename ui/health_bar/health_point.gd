@@ -2,8 +2,8 @@ extends ColorRect
 class_name HealthPoint
 
 
-const COLOR_DISABLED := "#777"
-const COLOR_ENABLED := "#fff"
+const COLOR_DISABLED := "#6e2727"
+const COLOR_ENABLED := "#e83b3b"
 
 
 func _ready():

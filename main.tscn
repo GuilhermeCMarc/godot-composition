@@ -10,9 +10,12 @@ polygons = [PackedInt32Array(0, 1, 2, 3)]
 outlines = [PackedVector2Array(-67, -47, -51, 64, 111, 73, 124, -64)]
 
 [node name="Main" type="Node2D"]
+z_as_relative = false
+y_sort_enabled = true
 position = Vector2(135, 90)
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+y_sort_enabled = true
 position = Vector2(-4, 3)
 navigation_polygon = SubResource("NavigationPolygon_8mdvy")
 navigation_layers = 15
@@ -23,6 +26,15 @@ position = Vector2(5, -7)
 
 [node name="Orc" parent="NavigationRegion2D" instance=ExtResource("3_icgue")]
 position = Vector2(20, 37)
+
+[node name="Orc2" parent="NavigationRegion2D" instance=ExtResource("3_icgue")]
+position = Vector2(27, 7)
+
+[node name="Orc3" parent="NavigationRegion2D" instance=ExtResource("3_icgue")]
+position = Vector2(-20, 34)
+
+[node name="Orc4" parent="NavigationRegion2D" instance=ExtResource("3_icgue")]
+position = Vector2(64, 10)
 
 [node name="Icon" type="Sprite2D" parent="."]
 position = Vector2(-115, -81)
