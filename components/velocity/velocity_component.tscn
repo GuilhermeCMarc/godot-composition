@@ -2,8 +2,7 @@
 
 [ext_resource type="Script" path="res://components/velocity/velocity_component.gd" id="1_3ovsq"]
 
-[node name="Velocity Component" type="Node"]
+[node name="VelocityComponent" type="Node"]
 script = ExtResource("1_3ovsq")
 max_speed = null
 acceleration = null
-friction = null

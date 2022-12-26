@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://lmkkt2t8sy7g"]
+[gd_scene load_steps=18 format=3 uid="uid://lmkkt2t8sy7g"]
 
 [ext_resource type="Texture2D" uid="uid://u5n8t44bittt" path="res://entities/orc/sprites/head.png" id="1_4wlmn"]
 [ext_resource type="Script" path="res://entities/orc/orc.gd" id="1_wy6q1"]
@@ -9,6 +9,8 @@
 [ext_resource type="Texture2D" uid="uid://boinklije1vk8" path="res://entities/orc/sprites/torso.png" id="6_6ml2o"]
 [ext_resource type="PackedScene" uid="uid://x5dq1x8gosjp" path="res://components/velocity/velocity_component.tscn" id="7_jtv3v"]
 [ext_resource type="PackedScene" uid="uid://d4b667mtpt8pl" path="res://components/pathfinding/pathfinding_component.tscn" id="9_0y8la"]
+[ext_resource type="PackedScene" uid="uid://da46ecw8g50mw" path="res://components/health/health_component.tscn" id="10_yd084"]
+[ext_resource type="PackedScene" uid="uid://djqyrn7rpn1my" path="res://ui/health_bar/health_bar.tscn" id="11_aqcwb"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_h3mif"]
 radius = 5.0
@@ -581,13 +583,14 @@ _data = {
 "walk": SubResource("Animation_rmb4b")
 }
 
-[node name="Orc" type="CharacterBody2D" node_paths=PackedStringArray("velocity_component", "pathfinding_component")]
+[node name="Orc" type="CharacterBody2D" node_paths=PackedStringArray("velocity_component", "pathfinding_component", "health_component")]
 collision_layer = 8
 collision_mask = 14
 motion_mode = 1
 script = ExtResource("1_wy6q1")
-velocity_component = NodePath("Velocity Component")
+velocity_component = NodePath("VelocityComponent")
 pathfinding_component = NodePath("PathfindingComponent")
+health_component = NodePath("HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_h3mif")
@@ -621,9 +624,16 @@ texture = ExtResource("2_3gw3i")
 [node name="Head" type="Sprite2D" parent="Visuals"]
 texture = ExtResource("1_4wlmn")
 
-[node name="Velocity Component" parent="." instance=ExtResource("7_jtv3v")]
+[node name="VelocityComponent" parent="." instance=ExtResource("7_jtv3v")]
 max_speed = 40
 acceleration = 3
 
 [node name="PathfindingComponent" parent="." node_paths=PackedStringArray("velocity_component") instance=ExtResource("9_0y8la")]
-velocity_component = NodePath("../Velocity Component")
+velocity_component = NodePath("../VelocityComponent")
+
+[node name="HealthComponent" parent="." instance=ExtResource("10_yd084")]
+
+[node name="HealthBar" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("11_aqcwb")]
+offset_top = -13.0
+offset_bottom = -13.0
+health_component = NodePath("../HealthComponent")

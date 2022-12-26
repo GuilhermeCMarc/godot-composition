@@ -50,7 +50,7 @@ collision_layer = 4
 collision_mask = 14
 motion_mode = 1
 script = ExtResource("1_yluma")
-velocity_component = NodePath("Velocity Component")
+velocity_component = NodePath("VelocityComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_f4575")
@@ -66,9 +66,9 @@ texture = ExtResource("1_abp6s")
 hframes = 4
 vframes = 9
 
-[node name="Velocity Component" parent="." instance=ExtResource("5_xejcu")]
-max_speed = 120
-acceleration = 10
+[node name="VelocityComponent" parent="." instance=ExtResource("5_xejcu")]
+max_speed = 80
+acceleration = 7
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true

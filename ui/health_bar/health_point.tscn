@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://cq5edt1dsvqr5"]
+
+[ext_resource type="Script" path="res://ui/health_bar/health_point.gd" id="1_wbxq3"]
+
+[node name="HealthPoint" type="ColorRect"]
+custom_minimum_size = Vector2(1, 1)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1279.0
+offset_bottom = -719.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color(0.729412, 0.0823529, 0.0705882, 1)
+script = ExtResource("1_wbxq3")

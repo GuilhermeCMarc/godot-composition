@@ -7,4 +7,7 @@ script = ExtResource("1_e8acj")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 path_desired_distance = 3.09
-target_desired_distance = 4.14
+target_desired_distance = 100.0
+
+[node name="IntervalTimer" type="Timer" parent="."]
+wait_time = 0.1
