@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://lmkkt2t8sy7g"]
+[gd_scene load_steps=16 format=3 uid="uid://lmkkt2t8sy7g"]
 
 [ext_resource type="Texture2D" uid="uid://u5n8t44bittt" path="res://entities/orc/sprites/head.png" id="1_4wlmn"]
 [ext_resource type="Script" path="res://entities/orc/orc.gd" id="1_wy6q1"]
@@ -8,8 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://dbt7jdrk2mtek" path="res://entities/orc/sprites/right_leg.png" id="5_4sm8o"]
 [ext_resource type="Texture2D" uid="uid://boinklije1vk8" path="res://entities/orc/sprites/torso.png" id="6_6ml2o"]
 [ext_resource type="PackedScene" uid="uid://x5dq1x8gosjp" path="res://components/velocity/velocity_component.tscn" id="7_jtv3v"]
-[ext_resource type="PackedScene" uid="uid://dcnbltxqygw68" path="res://components/movement/movement_component.tscn" id="8_16883"]
-[ext_resource type="PackedScene" uid="uid://c0wo61ggrntop" path="res://components/chase/chase_component.tscn" id="10_dlr6j"]
+[ext_resource type="PackedScene" uid="uid://d4b667mtpt8pl" path="res://components/pathfinding/pathfinding_component.tscn" id="9_0y8la"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_h3mif"]
 radius = 5.0
@@ -582,12 +581,13 @@ _data = {
 "walk": SubResource("Animation_rmb4b")
 }
 
-[node name="Orc" type="CharacterBody2D" node_paths=PackedStringArray("chase_component")]
+[node name="Orc" type="CharacterBody2D" node_paths=PackedStringArray("velocity_component", "pathfinding_component")]
 collision_layer = 8
 collision_mask = 14
 motion_mode = 1
 script = ExtResource("1_wy6q1")
-chase_component = NodePath("Chase Component")
+velocity_component = NodePath("Velocity Component")
+pathfinding_component = NodePath("PathfindingComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_h3mif")
@@ -621,23 +621,9 @@ texture = ExtResource("2_3gw3i")
 [node name="Head" type="Sprite2D" parent="Visuals"]
 texture = ExtResource("1_4wlmn")
 
-[node name="Components" type="Node" parent="."]
+[node name="Velocity Component" parent="." instance=ExtResource("7_jtv3v")]
+max_speed = 40
+acceleration = 3
 
-[node name="Velocity Component" parent="Components" instance=ExtResource("7_jtv3v")]
-max_speed = 70
-acceleration = 450
-friction = 500
-
-[node name="Movement" parent="Components" node_paths=PackedStringArray("character_body", "velocity_component") instance=ExtResource("8_16883")]
-character_body = NodePath("../..")
+[node name="PathfindingComponent" parent="." node_paths=PackedStringArray("velocity_component") instance=ExtResource("9_0y8la")]
 velocity_component = NodePath("../Velocity Component")
-
-[node name="Chase Component" parent="." node_paths=PackedStringArray("velocity_component", "character_body") instance=ExtResource("10_dlr6j")]
-velocity_component = NodePath("../Components/Velocity Component")
-character_body = NodePath("..")
-
-[node name="Chase Area" parent="Chase Component" index="0"]
-collision_layer = 0
-collision_mask = 8
-
-[editable path="Chase Component"]

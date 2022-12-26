@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://d4b667mtpt8pl"]
+
+[ext_resource type="Script" path="res://components/pathfinding/pathfinding_component.gd" id="1_e8acj"]
+
+[node name="PathfindingComponent" type="Node2D"]
+script = ExtResource("1_e8acj")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_desired_distance = 3.09
+target_desired_distance = 4.14

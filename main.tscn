@@ -18,6 +18,7 @@ navigation_polygon = SubResource("NavigationPolygon_8mdvy")
 navigation_layers = 15
 
 [node name="Player" parent="NavigationRegion2D" instance=ExtResource("2_xeioc")]
+unique_name_in_owner = true
 position = Vector2(5, -7)
 
 [node name="Orc" parent="NavigationRegion2D" instance=ExtResource("3_icgue")]

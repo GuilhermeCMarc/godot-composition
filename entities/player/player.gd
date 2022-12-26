@@ -1,13 +1,17 @@
 extends CharacterBody2D
 class_name Player
 
-@export var movement_component: MovementComponent
-@export var input_component: InputComponent
 
-@export var dodge_speed := 500
+@export @onready var velocity_component : VelocityComponent
 
-func _physics_process(delta: float) -> void:
-	move_with_input(delta)
 
-func move_with_input(delta: float) -> void:
-	movement_component.move_to_direction(delta, input_component.get_movement())
+func _process(_delta):
+	velocity_component.accelerate_in_direction(get_movement())
+	velocity_component.move(self)
+
+
+func get_movement() -> Vector2:
+	var movement := Vector2.ZERO
+	movement.x = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
+	movement.y = Input.get_action_strength("move_down") - Input.get_action_strength("move_up")
+	return movement.normalized()

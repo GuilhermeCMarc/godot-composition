@@ -9,25 +9,15 @@
 config_version=5
 
 _global_script_classes=[{
-"base": "NavigationAgent2D",
-"class": &"ChaseComponent",
-"language": &"GDScript",
-"path": "res://components/chase/chase_component.gd"
-}, {
-"base": "Node",
-"class": &"InputComponent",
-"language": &"GDScript",
-"path": "res://components/input/input_component.gd"
-}, {
-"base": "Node",
-"class": &"MovementComponent",
-"language": &"GDScript",
-"path": "res://components/movement/movement_component.gd"
-}, {
 "base": "CharacterBody2D",
 "class": &"Orc",
 "language": &"GDScript",
 "path": "res://entities/orc/orc.gd"
+}, {
+"base": "Node2D",
+"class": &"PathfindingComponent",
+"language": &"GDScript",
+"path": "res://components/pathfinding/pathfinding_component.gd"
 }, {
 "base": "CharacterBody2D",
 "class": &"Player",
@@ -40,10 +30,8 @@ _global_script_classes=[{
 "path": "res://components/velocity/velocity_component.gd"
 }]
 _global_script_class_icons={
-"ChaseComponent": "",
-"InputComponent": "",
-"MovementComponent": "",
 "Orc": "",
+"PathfindingComponent": "",
 "Player": "",
 "VelocityComponent": ""
 }
@@ -58,8 +46,8 @@ config/icon="res://icon.svg"
 
 [display]
 
-window/size/viewport_width=320
-window/size/viewport_height=180
+window/size/viewport_width=1280
+window/size/viewport_height=720
 window/stretch/mode="viewport"
 
 [input]

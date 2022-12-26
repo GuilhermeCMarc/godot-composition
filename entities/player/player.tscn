@@ -1,9 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://f6mhaoeg1pvn"]
+[gd_scene load_steps=8 format=3 uid="uid://f6mhaoeg1pvn"]
 
 [ext_resource type="Texture2D" uid="uid://bi046c7lbe631" path="res://entities/player/player.png" id="1_abp6s"]
 [ext_resource type="Script" path="res://entities/player/player.gd" id="1_yluma"]
-[ext_resource type="PackedScene" uid="uid://dcnbltxqygw68" path="res://components/movement/movement_component.tscn" id="3_64xir"]
-[ext_resource type="PackedScene" uid="uid://crjgs7v12ir0m" path="res://components/input/input_component.tscn" id="4_aouk1"]
 [ext_resource type="PackedScene" uid="uid://x5dq1x8gosjp" path="res://components/velocity/velocity_component.tscn" id="5_xejcu"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_f4575"]
@@ -46,14 +44,13 @@ _data = {
 "idle_r": SubResource("Animation_sc4tj")
 }
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("movement_component", "input_component")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("velocity_component")]
 position = Vector2(0, -7)
 collision_layer = 4
 collision_mask = 14
 motion_mode = 1
 script = ExtResource("1_yluma")
-movement_component = NodePath("Components/Movement Component")
-input_component = NodePath("Components/Input Component")
+velocity_component = NodePath("Velocity Component")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_f4575")
@@ -69,15 +66,11 @@ texture = ExtResource("1_abp6s")
 hframes = 4
 vframes = 9
 
-[node name="Components" type="Node" parent="."]
+[node name="Velocity Component" parent="." instance=ExtResource("5_xejcu")]
+max_speed = 120
+acceleration = 10
 
-[node name="Movement Component" parent="Components" node_paths=PackedStringArray("character_body", "velocity_component") instance=ExtResource("3_64xir")]
-character_body = NodePath("../..")
-velocity_component = NodePath("../Velocity Component")
-
-[node name="Input Component" parent="Components" instance=ExtResource("4_aouk1")]
-
-[node name="Velocity Component" parent="Components" instance=ExtResource("5_xejcu")]
-max_speed = 80
-acceleration = 500
-friction = 500
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+zoom = Vector2(4, 4)
+position_smoothing_enabled = true
