@@ -1,11 +1,27 @@
-[gd_scene load_steps=4 format=3 uid="uid://bjdc2dncaqnbj"]
+[gd_scene load_steps=5 format=3 uid="uid://bjdc2dncaqnbj"]
 
 [ext_resource type="Texture2D" uid="uid://8ssmparb0fu" path="res://icon.svg" id="1_6lj83"]
 [ext_resource type="PackedScene" uid="uid://f6mhaoeg1pvn" path="res://entities/player/player.tscn" id="2_xeioc"]
 [ext_resource type="PackedScene" uid="uid://lmkkt2t8sy7g" path="res://entities/orc/orc.tscn" id="3_icgue"]
 
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_8mdvy"]
+vertices = PackedVector2Array(124, -64, 111, 73, -51, 64, -67, -47)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+outlines = [PackedVector2Array(-67, -47, -51, 64, 111, 73, 124, -64)]
+
 [node name="Main" type="Node2D"]
 position = Vector2(135, 90)
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+position = Vector2(-4, 3)
+navigation_polygon = SubResource("NavigationPolygon_8mdvy")
+navigation_layers = 15
+
+[node name="Player" parent="NavigationRegion2D" instance=ExtResource("2_xeioc")]
+position = Vector2(5, -7)
+
+[node name="Orc" parent="NavigationRegion2D" instance=ExtResource("3_icgue")]
+position = Vector2(20, 37)
 
 [node name="Icon" type="Sprite2D" parent="."]
 position = Vector2(-115, -81)
@@ -21,9 +37,3 @@ texture = ExtResource("1_6lj83")
 position = Vector2(153, 4)
 scale = Vector2(0.40625, 0.40625)
 texture = ExtResource("1_6lj83")
-
-[node name="Player" parent="." instance=ExtResource("2_xeioc")]
-position = Vector2(1, -4)
-
-[node name="Orc" parent="." instance=ExtResource("3_icgue")]
-position = Vector2(16, 40)

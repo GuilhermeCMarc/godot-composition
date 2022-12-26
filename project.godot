@@ -10,9 +10,9 @@ config_version=5
 
 _global_script_classes=[{
 "base": "NavigationAgent2D",
-"class": &"AIPathfindingComponent",
+"class": &"ChaseComponent",
 "language": &"GDScript",
-"path": "res://components/ai_pathfinding/ai_pathfinding_component.gd"
+"path": "res://components/chase/chase_component.gd"
 }, {
 "base": "Node",
 "class": &"InputComponent",
@@ -40,7 +40,7 @@ _global_script_classes=[{
 "path": "res://components/velocity/velocity_component.gd"
 }]
 _global_script_class_icons={
-"AIPathfindingComponent": "",
+"ChaseComponent": "",
 "InputComponent": "",
 "MovementComponent": "",
 "Orc": "",
@@ -60,7 +60,6 @@ config/icon="res://icon.svg"
 
 window/size/viewport_width=320
 window/size/viewport_height=180
-window/size/mode=3
 window/stretch/mode="viewport"
 
 [input]
