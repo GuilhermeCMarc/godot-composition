@@ -1,8 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://f6mhaoeg1pvn"]
+[gd_scene load_steps=15 format=3 uid="uid://f6mhaoeg1pvn"]
 
 [ext_resource type="Texture2D" uid="uid://bi046c7lbe631" path="res://entities/player/player.png" id="1_abp6s"]
 [ext_resource type="Script" path="res://entities/player/player.gd" id="1_yluma"]
+[ext_resource type="PackedScene" uid="uid://da46ecw8g50mw" path="res://components/health/health_component.tscn" id="4_1dta1"]
+[ext_resource type="PackedScene" uid="uid://ci8y5ca10o6me" path="res://components/hurtbox/hurtbox_component.tscn" id="5_tmjh5"]
 [ext_resource type="PackedScene" uid="uid://x5dq1x8gosjp" path="res://components/velocity/velocity_component.tscn" id="5_xejcu"]
+[ext_resource type="Texture2D" uid="uid://ca7tmri20lng6" path="res://ui/health_bar/black_pixel.png" id="6_qyfq4"]
+[ext_resource type="PackedScene" uid="uid://ddu10y6wh3hq8" path="res://components/attackbox/attackbox_component.tscn" id="7_asss5"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_f4575"]
 radius = 3.0
@@ -21,6 +25,35 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sword/AttackBoxComponent/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_30q7n"]
+resource_name = "attack"
+length = 0.1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sword/AttackBoxComponent/CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
 }
 
 [sub_resource type="Animation" id="Animation_sc4tj"]
@@ -41,8 +74,15 @@ tracks/0/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7oukw"]
 _data = {
 "RESET": SubResource("Animation_g30da"),
+"attack": SubResource("Animation_30q7n"),
 "idle_r": SubResource("Animation_sc4tj")
 }
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_14qd4"]
+size = Vector2(7, 12)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8lpy5"]
+size = Vector2(14, 4)
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("velocity_component")]
 position = Vector2(0, -7)
@@ -67,11 +107,36 @@ texture = ExtResource("1_abp6s")
 hframes = 4
 vframes = 9
 
+[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("5_tmjh5")]
+collision_layer = 4
+collision_mask = 8
+health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
+position = Vector2(-0.5, 1)
+shape = SubResource("RectangleShape2D_14qd4")
+debug_color = Color(0.823529, 0.34902, 0.509804, 0.419608)
+
 [node name="VelocityComponent" parent="." instance=ExtResource("5_xejcu")]
 max_speed = 80
 acceleration = 7
+
+[node name="HealthComponent" parent="." instance=ExtResource("4_1dta1")]
+max_health = 10
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
 zoom = Vector2(4, 4)
 position_smoothing_enabled = true
+
+[node name="Sword" type="Sprite2D" parent="."]
+position = Vector2(13, 2)
+texture = ExtResource("6_qyfq4")
+
+[node name="AttackBoxComponent" parent="Sword" instance=ExtResource("7_asss5")]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sword/AttackBoxComponent"]
+shape = SubResource("RectangleShape2D_8lpy5")
+debug_color = Color(0.878431, 0.298039, 0.431373, 0.419608)

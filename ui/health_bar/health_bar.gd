@@ -4,7 +4,9 @@ class_name HealthBarUI
 @export var health_component: HealthComponent
 
 @onready var health_point_scene : PackedScene = preload("res://ui/health_bar/health_point.tscn")
-@onready var points_holder: GridContainer = $"%PointsHolder"
+@onready var points_holder: GridContainer = $%PointsHolder
+@onready var anim_player: AnimationPlayer = $AnimationPlayer
+
 
 func _ready():
 	visible = false
@@ -13,7 +15,6 @@ func _ready():
 
 
 func update_health(new_value: int) -> void:
-	# todo: animate
 	var max_health := get_max_health()
 	if max_health == 0:
 		init(health_component.get_max_health())
@@ -23,14 +24,17 @@ func update_health(new_value: int) -> void:
 		(points_holder.get_children()[max_health - i - 1] as HealthPoint).enable()
 	for i in range(max_health - value_to_update):
 		(points_holder.get_children()[i] as HealthPoint).disable()
+	anim_player.queue("shake")
 
 
 func init(max_health: int):
 	update_max_health(max_health)
+	scale = Vector2.ZERO
 	visible = true
+	anim_player.queue("enter")
+
 
 func update_max_health(max_health: int) -> void:
-	# todo: animate
 	delete_children()
 	for i in range(max_health):
 		points_holder.add_child(health_point_scene.instantiate())

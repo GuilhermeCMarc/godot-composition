@@ -1,0 +1,58 @@
+[gd_scene load_steps=11 format=3 uid="uid://c3xy8mhbrlbs0"]
+
+[ext_resource type="Script" path="res://entities/test/test_enemy.gd" id="1_0crpx"]
+[ext_resource type="PackedScene" uid="uid://ci8y5ca10o6me" path="res://components/hurtbox/hurtbox_component.tscn" id="2_h1gwm"]
+[ext_resource type="Texture2D" uid="uid://ca7tmri20lng6" path="res://ui/health_bar/black_pixel.png" id="2_jodpe"]
+[ext_resource type="PackedScene" uid="uid://b7mxht1rkpd4b" path="res://assets/shadows/shadow_md.tscn" id="3_044if"]
+[ext_resource type="PackedScene" uid="uid://da46ecw8g50mw" path="res://components/health/health_component.tscn" id="4_wuhjw"]
+[ext_resource type="PackedScene" uid="uid://x5dq1x8gosjp" path="res://components/velocity/velocity_component.tscn" id="5_ru05a"]
+[ext_resource type="PackedScene" uid="uid://d4b667mtpt8pl" path="res://components/pathfinding/pathfinding_component.tscn" id="6_ls03o"]
+[ext_resource type="PackedScene" uid="uid://djqyrn7rpn1my" path="res://ui/health_bar/health_bar.tscn" id="7_ccyu3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ikoww"]
+size = Vector2(16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2jc1k"]
+size = Vector2(13, 13)
+
+[node name="TestEnemy" type="CharacterBody2D" node_paths=PackedStringArray("velocity_component", "pathfinding_component", "health_component")]
+collision_layer = 8
+collision_mask = 6
+script = ExtResource("1_0crpx")
+velocity_component = NodePath("VelocityComponent")
+pathfinding_component = NodePath("PathfindingComponent")
+health_component = NodePath("HealthComponent")
+
+[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("2_h1gwm")]
+health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
+position = Vector2(0, -7)
+shape = SubResource("RectangleShape2D_ikoww")
+debug_color = Color(0.819608, 0.333333, 0.588235, 0.419608)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -7)
+scale = Vector2(14, 14)
+texture = ExtResource("2_jodpe")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -7)
+shape = SubResource("RectangleShape2D_2jc1k")
+
+[node name="ShadowMedium" parent="." instance=ExtResource("3_044if")]
+
+[node name="HealthComponent" parent="." instance=ExtResource("4_wuhjw")]
+max_health = 3
+
+[node name="VelocityComponent" parent="." instance=ExtResource("5_ru05a")]
+max_speed = 30
+acceleration = 8
+
+[node name="PathfindingComponent" parent="." node_paths=PackedStringArray("velocity_component") instance=ExtResource("6_ls03o")]
+velocity_component = NodePath("../VelocityComponent")
+
+[node name="HealthBar" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("7_ccyu3")]
+offset_top = -17.0
+offset_bottom = -17.0
+health_component = NodePath("../HealthComponent")

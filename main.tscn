@@ -1,8 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://bjdc2dncaqnbj"]
+[gd_scene load_steps=4 format=3 uid="uid://bjdc2dncaqnbj"]
 
-[ext_resource type="Texture2D" uid="uid://8ssmparb0fu" path="res://icon.svg" id="1_6lj83"]
 [ext_resource type="PackedScene" uid="uid://f6mhaoeg1pvn" path="res://entities/player/player.tscn" id="2_xeioc"]
-[ext_resource type="PackedScene" uid="uid://lmkkt2t8sy7g" path="res://entities/orc/orc.tscn" id="3_icgue"]
+[ext_resource type="PackedScene" uid="uid://c3xy8mhbrlbs0" path="res://entities/test/test_enemy.tscn" id="4_28h3u"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_8mdvy"]
 vertices = PackedVector2Array(124, -64, 111, 73, -51, 64, -67, -47)
@@ -24,29 +23,5 @@ navigation_layers = 15
 unique_name_in_owner = true
 position = Vector2(5, -7)
 
-[node name="Orc" parent="NavigationRegion2D" instance=ExtResource("3_icgue")]
-position = Vector2(20, 37)
-
-[node name="Orc2" parent="NavigationRegion2D" instance=ExtResource("3_icgue")]
-position = Vector2(27, 7)
-
-[node name="Orc3" parent="NavigationRegion2D" instance=ExtResource("3_icgue")]
-position = Vector2(-20, 34)
-
-[node name="Orc4" parent="NavigationRegion2D" instance=ExtResource("3_icgue")]
-position = Vector2(64, 10)
-
-[node name="Icon" type="Sprite2D" parent="."]
-position = Vector2(-115, -81)
-scale = Vector2(0.3125, 0.3125)
-texture = ExtResource("1_6lj83")
-
-[node name="Icon2" type="Sprite2D" parent="."]
-position = Vector2(-95, 131)
-scale = Vector2(0.484375, 0.484375)
-texture = ExtResource("1_6lj83")
-
-[node name="Icon3" type="Sprite2D" parent="."]
-position = Vector2(153, 4)
-scale = Vector2(0.40625, 0.40625)
-texture = ExtResource("1_6lj83")
+[node name="TestEnemy" parent="." instance=ExtResource("4_28h3u")]
+position = Vector2(75, 9)
