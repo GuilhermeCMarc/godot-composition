@@ -1,13 +1,14 @@
 extends CharacterBody2D
 class_name Orc
 
-
 @export @onready var velocity_component : VelocityComponent
 @export @onready var pathfinding_component: PathfindingComponent
 @export @onready var health_component: HealthComponent
 
+
 func _ready():
 	health_component.connect("on_death", on_death)
+
 
 func get_player() -> Node2D:
 	return get_node("%Player")
